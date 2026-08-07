@@ -22,6 +22,10 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <java.version>11</java.version>
+        <!-- SonarCloud Configuration -->
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <sonar.organization>ankittomar0207</sonar.organization>
+        <sonar.projectKey>ankittomar0207_Jenkins-Zero-To-Hero</sonar.projectKey>
     </properties>
 
     <dependencies>
