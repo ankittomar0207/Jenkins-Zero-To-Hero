@@ -30,7 +30,7 @@ jobs:
           cd java-maven-sonar-argocd-helm-k8s/spring-boot-app
           mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
              -Dsonar.projectKey=ankittomar0207_Jenkins-Zero-To-Hero \
-              -Dsonar.organization=com.abhishek:spring-boot-demo \
+              -Dsonar.organization=ankittomar0207 \
               -Dsonar.token=$SONAR_TOKEN \
     
             -Dsonar.token=$SONAR_TOKEN \
