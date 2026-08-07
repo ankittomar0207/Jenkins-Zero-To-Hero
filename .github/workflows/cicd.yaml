@@ -29,6 +29,10 @@ jobs:
         run: |
           cd java-maven-sonar-argocd-helm-k8s/spring-boot-app
           mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+             -Dsonar.projectKey=ankittomar0207_Jenkins-Zero-To-Hero \
+              -Dsonar.organization=com.abhishek:spring-boot-demo \
+              -Dsonar.token=$SONAR_TOKEN \
+    
             -Dsonar.token=$SONAR_TOKEN \
             -Dsonar.host.url="https://sonarcloud.io" \
             -Dsonar.verbose=true
