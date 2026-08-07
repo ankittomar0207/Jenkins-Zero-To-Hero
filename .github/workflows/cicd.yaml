@@ -9,37 +9,27 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
-    # Docker container agent equivalent
     container:
       image: abhishekf5/maven-abhishek-docker-agent:v1
       options: --user root -v /var/run/docker.sock:/var/run/docker.sock
 
     steps:
-      # Step 1: Checkout the repository
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # Step 2: Build and Test
       - name: Build and Test
         run: |
           ls -ltr
           cd java-maven-sonar-argocd-helm-k8s/spring-boot-app
           mvn clean package
-        
-      -  name: SonarQube Cloud Code Scan
-         uses: SonarSource/sonarqube-scan-action@v6
-         with:
-          args: >
-            -Dsonar.verbose=true
-         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: "https://sonarcloud.io"
 
+      - name: SonarQube Cloud Scan
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           cd java-maven-sonar-argocd-helm-k8s/spring-boot-app
-          mvn sonar:sonar -Dsonar.login=$SONAR_TOKEN -Dsonar.host.url="https://sonarcloud.io"
+          mvn sonar:sonar -Dsonar.token=$SONAR_TOKEN -Dsonar.host.url="https://sonarcloud.io" -Dsonar.verbose=true
 
-      # Step 4: Build and Push Docker Image
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
@@ -53,5 +43,3 @@ jobs:
           cd java-maven-sonar-argocd-helm-k8s/spring-boot-app
           docker build -t $DOCKER_IMAGE .
           docker push $DOCKER_IMAGE
-
-     
